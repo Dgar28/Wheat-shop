@@ -8,20 +8,20 @@
 <body>
 <h1>Add Product</h1>
 
-<form action="/norma" method="post">
+<form action="{{ route('product.store') }}" method="post">
     @csrf
 
-    <label for="name">Name:</label><br>
-    <input type="text" name="name"><br>
+    <label for="name">Name:</label>
+    <input type="text" name="name"><br><br>
 
-    <label for="price">Price:</label><br>
-    <input type="text" name="price"><br>
+    <label for="price">Price:</label>
+    <input type="text" name="price"><br><br>
 
-    <label for="product_code">Product_Code:</label><br>
-    <input type="text" name="product_code"><br>
+    <label for="product_code">Product_Code:</label>
+    <input type="text" name="product_code"><br><br>
 
-    <label for="type">Type:</label><br>
-    <input type="text" name="type"><br>
+    <label for="type">Type:</label>
+    <input type="text" name="type"><br><br>
 
 
     <input type="submit" value="Create">

@@ -10,9 +10,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('product.index');
+        $products = Product::get();
+        return view('product.index', compact('products'));
     }
 
     /**
@@ -28,7 +29,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+           'price' => 'required|max:8',
+           'product_code' => 'required',
+            'type' => 'required'
+        ]);
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->product_code = $request->product_code;
+        $product->type = $request->type;
+        $product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -36,7 +51,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('product.show', compact('product'));
     }
 
     /**
@@ -44,7 +59,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('product.edit', compact('product'));
     }
 
     /**
@@ -52,7 +67,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+           'price' => 'required|max:8',
+           'product_code' => 'required',
+            'type' => 'required'
+        ]);
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->product_code = $request->product_code;
+        $product->type = $request->type;
+        $product->save();
+        return redirect()->route('product.index');
     }
 
     /**
@@ -60,6 +87,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index');
     }
 }
