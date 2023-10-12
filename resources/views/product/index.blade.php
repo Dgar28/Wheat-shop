@@ -7,27 +7,41 @@
 </head>
 <body>
     <h1>Product Listing</h1>
+    <table>
+        <thead>
+            <throw>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Code</td>
+                <td>Type</td>
+            </throw>
+        </thead>
+        <tbody>
+            @foreach ($products as $product)
+             <tr>
+             <td>{{ $product->name}}</td>
+            <td>{{ $product->price }}</td>
+            <td>{{ $product->product_code }}</td>
+            <td>{{ $product->type }}</td>
+            <td>
 
-    <ul>
-        @foreach ($products as $product)
-         <li>
-            <a href="{{ route('product.show', $product) }}">
-                {{ $product->name}}
-            </a>
-
-            <a href="{{ route('product.edit', $product) }}" method="POST">
-             Edit
-            </a>
+                <a href="{{ route('product.show', $product->id) }}">
+                    See more 
+                </a>
+                <a href="{{ route('product.edit', $product) }}" method="POST">
+                     Edit
+                 </a>
 
             <form action="{{ route('product.destroy', $product) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value="Delete">
             </form>
-         </li>
-
-         @endforeach
-    </ul>
-    
+        </td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
+    <a href="{{ route('product.create') }}"> Add Product</a>
 </body>
 </html>
