@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use PHPUnit\Metadata\Api\Requirement;
 
-class Product extends Model
+class Requirement extends Model
 {
     use HasFactory;
 
-    public function requirements()
+
+    public function product()
     {
-        return $this->hasMany(Requirement::class);
+        return $this->belongsTo(Product::class);
     }
 }

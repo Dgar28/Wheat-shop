@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RequirementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,13 @@ Route::get('/', function () {
 
 Route::resource('product', ProductController::class);
 
+
+Route::get('prueba', function () {
+    return view('prueba');
+});
+
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -29,3 +37,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('rec', RequirementController::class);
