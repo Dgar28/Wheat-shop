@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Requirement;
 use Illuminate\Http\Request;
-use App\Models\Product;
 
 class RequirementController extends Controller
 {
@@ -22,10 +21,7 @@ class RequirementController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
 
-        dd($products);
-        return view('rec.capture', compact('products'));
     }
 
     /**
@@ -33,13 +29,7 @@ class RequirementController extends Controller
      */
     public function store(Request $request)
     {
-        $rec = new Requirement();
-        $rec->identificador = $request->identificador;
-        $rec->product_id = $request->product_id;
-
-        $rec->save();
-
-        return redirect()->route('product.index');
+       
     }
 
     /**
