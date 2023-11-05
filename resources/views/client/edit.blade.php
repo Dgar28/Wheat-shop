@@ -14,30 +14,30 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('styles/css/style.css') }}" rel="stylesheet">
     
-    <title>Create Product</title>
+    <title>Create Client</title>
 </head>
 <body>
-    <a href="{{ route('product.index') }}">Return to products</a>
+    <a href="{{ route('client.index') }}">Return to clients</a>
 
-    <a href="{{ route('product.show', $product->id) }}">Return to {{$product->name}}</a>
+    <a href="{{ route('client.show', $client->id) }}">Return to {{$client->client_name}}</a>
 
     <h1>Add Product</h1>
 
-    <form action="{{ route('product.update', $product) }}" method="POST">
+    <form action="{{ route('client.update', $client) }}" method="POST">
         @csrf
         @method('PATCH')
 
-    <label for="name">Name:</label><br>
-    <input type="text" name="name" id="" value="{{ $product->name }}"><br>
+    <label for="client_code">Client_code:</label><br>
+    <input type="text" name="client_code" id="" value="{{ $client->client_code }}"><br>
 
-    <label for="price">Price:</label>
-    <input type="text" name="price" id="" value="{{ $product->price }}"><br>
+    <label for="client_name">Name:</label>
+    <input type="text" name="client_name" id="" value="{{ $client->client_name }}"><br>
 
-    <label for="product_code">Product_Code:</label>
-    <input type="text" name="product_code" id="" value="{{ $product->product_code }}"><br>
+    <label for="age">Age:</label>
+    <input type="text" name="age" id="" value="{{ $client->age }}"><br>
 
-    <label for="type">Type:</label>
-    <input type="text" name="type" id="" value="{{ $product->type }}"><br>
+    <label for="phone">Phone:</label>
+    <input type="text" name="phone" id="" value="{{ $client->phone }}"><br>
 
     <input type="submit" value="Create">
     </form>

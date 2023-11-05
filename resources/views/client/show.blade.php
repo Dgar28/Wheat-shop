@@ -14,21 +14,21 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('styles/css/style.css') }}" rel="stylesheet">
 
-    <title>Show Product</title>
+    <title>Show Client</title>
 </head>
 
 <body>
-<a href="{{ route('product.index') }}">Return to Products</a>
+<a href="{{ route('client.index') }}">Return to Clients</a>
 
-<h1> Product Details </h1>
+<h1> Client Details </h1>
 <div class="divLists">
-                <h2>Name - {{$product->name}}</h2>
-                <h2>Price - {{$product->price}}</h2>
-                <h2>Code - {{$product->product_code}}</h2>
-                <h2>Type - {{$product->type}}</h2>
+                <h2>Client_code - {{$client->client_code}}</h2>
+                <h2>Name - {{$client->client_name}}</h2>
+                <h2>Age - {{$client->age}}</h2>
+                <h2>Phone - {{$client->phone}}</h2>
             </div>
             <br>
 
-    <a class="btn btn-sm btn-warning" href="{{route('product.edit',$product->id)}}">Edit {{$product->name}}</a>
+    <a class="btn btn-sm btn-warning" href="{{route('client.edit',$client->id)}}">Edit {{$client->client_code}}</a>
 </body>
 </html>
