@@ -2,7 +2,7 @@
 
 
     <h1>Client Listing</h1>
-    <table>
+    <table class="table table-striped">
         <thead>
             <throw>
                 <td>Client_code</td>
@@ -27,6 +27,7 @@
                         <form action="{{ route('client.destroy', $client) }}" method="POST">
                             @csrf
                             @method('DELETE')
+                            
                             <input type="submit" value="Delete">
                         </form>
                     </td>
