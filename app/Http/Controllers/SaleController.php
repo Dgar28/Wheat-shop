@@ -47,7 +47,7 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        return view('sale.show', compact('sale'));
+        return view('sale.sale_show', compact('sale'));
     }
 
     /**
@@ -55,7 +55,7 @@ class SaleController extends Controller
      */
     public function edit(Sale $sale)
     {
-        //
+        return view('sale.sale_edit', compact('sale'));
     }
 
     /**
@@ -63,7 +63,17 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-
+        try{
+            $sale->sale_folio = $request->sale_folio;
+            $sale->sale_date = $request->sale_date;
+            $sale->client_id = $request->client_id;
+            $sale->save();
+            return redirect()->route('sale.index')
+                ->with('success','Sale updated successfully');
+            }
+            catch (\Exception $e) {
+                return redirect()->route('sale.index'); 
+            }
     }
 
     /**

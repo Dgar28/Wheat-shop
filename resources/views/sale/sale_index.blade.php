@@ -2,7 +2,7 @@
 
 
     <h1>Sale Listing</h1>
-    <table>
+    <table class="table table-striped">
         <thead>
             <throw>
                 <td>Folio</td>
@@ -34,5 +34,5 @@
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('sale.create') }}" class="btn btn-primary" role="button"> Add Client</a>
+    <a href="{{ route('sale.create') }}" class="btn btn-primary" role="button"> Add Sale</a>
 </x-mi-layout>
