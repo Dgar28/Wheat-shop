@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SaleController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+   // return view('welcome'); esta es la vista general de laravel
 });
 
-Route::resource('client', ClientController::class);
+Route::resource('client', ClientController::class)->middleware('auth');
 Route::resource('sale', SaleController::class);
 
 Route::get('prueba', function () {
@@ -34,6 +36,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('welcome');
     })->name('dashboard');
 });

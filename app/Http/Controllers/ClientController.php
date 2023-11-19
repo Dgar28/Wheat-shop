@@ -4,16 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $clients = Client::all();
-        return view('client.index', compact('clients'));
+        //$clients = Client::all();
+        $clients = Client::where('user_id', Auth::id())->get();
+        //return view('client.index', compact('clients'));
+        return view('client.index', ['clients' => $clients]);
     }
 
     /**
@@ -35,7 +43,11 @@ class ClientController extends Controller
            'age' => 'required',
             'phone' => 'required'
         ]);
-        try{
+
+        $request->merge(['user_id' => Auth::id()]);
+        Client::create($request->all());
+
+        /*try{
         $client = new Client();
         $client->client_code = $request->client_code;
         $client->client_name = $request->client_name;
@@ -50,6 +62,8 @@ class ClientController extends Controller
         catch (\Exception $e) {
             return redirect()->route('client.index'); 
         }
+        */
+        return redirect()->route('client.index');
     }
 
     /**

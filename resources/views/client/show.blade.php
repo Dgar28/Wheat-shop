@@ -36,6 +36,7 @@
             @endforeach
         </ul>
     </p>
+    <h4>User created: {{ $client->user->client_name }}</h4>
 
     <a class="btn btn-sm btn-warning" href="{{route('client.edit',$client->id)}}">Edit {{$client->client_code}}</a>
 </body>
