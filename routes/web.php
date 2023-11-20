@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ProductController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -16,20 +17,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//ruta vista principal
 Route::get('/', function () {
     return view('welcome');
    // return view('welcome'); esta es la vista general de laravel
 });
 
+
+//rutas tablas (entidades)
 Route::resource('client', ClientController::class)->middleware('auth');
 Route::resource('sale', SaleController::class);
+Route::resource('product', ProductController::class);
 
+
+//ruta test
 Route::get('prueba', function () {
     return view('prueba');
 });
 
 
-
+//rutas autenticación
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
