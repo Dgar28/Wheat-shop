@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('price');
             $table->string('product_code');
             $table->string('type');
+            $table->string('archivo_location');
+            $table->string('archivo_name');
             $table->timestamps();
         });
     }

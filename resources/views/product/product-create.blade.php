@@ -15,7 +15,7 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('styles/css/style.css') }}" rel="stylesheet">
 
-    <title>Document</title>
+    <title>Create Client</title>
 </head>
 <body>
 <h1>Add Product</h1>
@@ -29,7 +29,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('product.store') }}" method="POST">
+    <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <label for="name">Name:</label><br>
@@ -43,6 +43,9 @@
 
     <label for="type">Type:</label><br>
     <input type="text" name="type" id="" value="{{ old('type') }}"><br><br>
+
+    <label for="archivo">Load File:</label>
+    <input type="file" name="archivo" id="archivo">
 
     <input type="submit" value="Create">
 </form>

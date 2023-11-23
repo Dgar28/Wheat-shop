@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -33,24 +34,40 @@ class ProductController extends Controller
             'name' => 'required|max:20',
            'price' => 'required|max:8',
            'product_code' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'archivo' => 'required|max:35000',
         ]);
 
-        try{
-            $product = new Product();
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->product_code = $request->product_code;
-        $product->type = $request->type;
-        $product->save();
+       // try{
+         //   $product = new Product();
+       // $product->name = $request->name;
+       // $product->price = $request->price;
+       // $product->product_code = $request->product_code;
+       // $product->type = $request->type;
+       // $product->save();
 
-        //return redirect()->route('product.index');
-        return redirect('product')
-            ->with('success','Product created successfully. ');
-        }
-        catch (\Exception $e) {
-            return redirect()->route('product.index'); 
-        }
+       if (!$request->file('archivo')->isValid()) {
+            
+       }
+
+        $request->merge([
+            'archivo_name' => $request->file('archivo')->getClientOriginalName(),
+            'archivo_location' => $request->file('archivo')->store('public/img'),
+        ]);
+        $product = Product::create($request->all());
+        
+        //if ($request->file('archivo')->isValid()) {
+         //   $request->file('archivo')->store('img');//recuperar archivo
+       // }   
+
+
+      //  return redirect('product')
+      //      ->with('success','Product created successfully. ');
+       // }
+       // catch (\Exception $e) {
+       //     return redirect()->route('product.index'); 
+       // }
+        return redirect()->route('product.index'); 
     }
 
     /**
@@ -109,6 +126,11 @@ class ProductController extends Controller
         catch (\Exception $e) {
             return redirect()->route('product.index'); 
         }
+    }
+
+    public function descargar(Product $product)
+    {
+       return Storage::download($product->archivo_location, $product->archivo_name);
     }
     
 }

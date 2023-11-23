@@ -24,6 +24,9 @@ Route::get('/', function () {
    // return view('welcome'); esta es la vista general de laravel
 });
 
+//ruta descarga archivos (se pone antes de las tipo resource)
+Route::get('product-descarga/{product}', [ProductController::class, 'descargar'])->name('product.descarga');
+
 
 //rutas tablas (entidades)
 Route::resource('client', ClientController::class)->middleware('auth');
