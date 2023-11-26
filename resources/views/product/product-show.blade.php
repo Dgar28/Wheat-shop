@@ -39,6 +39,15 @@
             </h4>
 
             <br>
+
+            <p>
+                <ul>
+                    @foreach($product->product_records as $prd)
+                    <li>{{ $prd->product_recordCode }}</li>
+                    @endforeach
+                </ul>
+            </p>
+            
             <a class="btn btn-sm btn-warning" href="{{route('product.edit',$product->id)}}">Edit {{$product->name}}</a>
 
 </body>
