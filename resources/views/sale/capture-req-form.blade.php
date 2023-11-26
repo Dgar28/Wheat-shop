@@ -19,6 +19,17 @@
 </head>
 <body>
 
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li> <br>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+
     <form action="{{ route('sale.store') }}" method="post">
         @csrf
         <label for="sale_folio">Folio</label>

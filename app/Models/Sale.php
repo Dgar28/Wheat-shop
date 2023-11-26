@@ -11,5 +11,10 @@ class Sale extends Model
     public $timestamps = false;
     public function clients(){
         return $this->belongsTo(Client::class);
+
+    }
+
+    public function sale_details(){
+        return $this->hasMany(Sale_detail::class);
     }
 }

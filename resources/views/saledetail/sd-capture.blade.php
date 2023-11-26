@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('styles/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
@@ -14,29 +15,31 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('styles/css/style.css') }}" rel="stylesheet">
 
-    <title>Show Sale</title>
+    <title>Document</title>
 </head>
-
 <body>
-<a href="{{ route('sale.index') }}">Return to Sales</a>
 
-<h1> Client Details </h1>
-<div class="divLists">
-                <h2>Folio - {{$sale->sale_folio}}</h2>
-                <h2>Date - {{$sale->sale_date}}</h2>
-                <h2>Client - {{$sale->client_id}}</h2>
-            </div>
-            <br>
+    <form action="{{ route('sale_detail.store') }}" method="post">
+        @csrf
+        <label for="quantity">Quantity</label>
+        <input type="integer" name="quantity"><br>
 
-            <p>
-        <ul>
-            @foreach($sale->sale_details as $sd)
-             <li>{{ $sd->sale_detailCode }}</li>
+        <label for="buy_price">Price</label>
+        <input type="text" name="buy_price"><br>
+
+
+        <select name="sale_id">
+            @foreach ($sales as $sale)
+                <option value="{{ $sale->id }}">
+                    {{ $sale->sale_folio }}
+                </option>
             @endforeach
-        </ul>
-    </p>
+        </select>
 
-    <a class="btn btn-sm btn-warning" href="{{route('sale.edit',$sale->id)}}">Edit {{$sale->sale_folio}}</a>
-   
+        <br>
+
+        <input type="submit" value="Enter SaleDetails">
+    </form>
+
 </body>
 </html>

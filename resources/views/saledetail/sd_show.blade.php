@@ -14,29 +14,24 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('styles/css/style.css') }}" rel="stylesheet">
 
-    <title>Show Sale</title>
+    <title>Show Sale Details</title>
 </head>
 
 <body>
-<a href="{{ route('sale.index') }}">Return to Sales</a>
+<a href="{{ route('sale_detail.index') }}">Return to Sale Details</a>
 
-<h1> Client Details </h1>
+<h1> Sale Details </h1>
 <div class="divLists">
-                <h2>Folio - {{$sale->sale_folio}}</h2>
-                <h2>Date - {{$sale->sale_date}}</h2>
-                <h2>Client - {{$sale->client_id}}</h2>
+                <h2>Quantity - {{$sale_detail->quantity}}</h2>
+                <h2>Price - {{$sale_detail->buy_price}}</h2>
+                <h2>Sale - {{$sale_detail->sale_id}}</h2>
             </div>
             <br>
 
             <p>
-        <ul>
-            @foreach($sale->sale_details as $sd)
-             <li>{{ $sd->sale_detailCode }}</li>
-            @endforeach
-        </ul>
     </p>
 
-    <a class="btn btn-sm btn-warning" href="{{route('sale.edit',$sale->id)}}">Edit {{$sale->sale_folio}}</a>
-   
+    <a class="btn btn-sm btn-warning" href="{{route('sale_detail.edit',$sale_detail->id)}}">Edit {{$sale_detail->quantity}}</a>
+
 </body>
 </html>

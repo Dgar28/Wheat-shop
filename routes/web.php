@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleDetailController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::get('product-descarga/{product}', [ProductController::class, 'descargar']
 Route::resource('client', ClientController::class)->middleware('auth');
 Route::resource('sale', SaleController::class);
 Route::resource('product', ProductController::class);
+Route::resource('sale_detail', SaleDetailController::class);
 
 
 //ruta test

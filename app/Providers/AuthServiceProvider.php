@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use App\Models\Sale_detail;
+use App\Models\User;
+
+ use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -22,5 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        //PERMISO
+        Gate::define('saledetail.sd_edit', function (User $user, Sale_detail $sale_detail): bool {
+            return ((bool) $user->is_admin || $user->id === $sale_detail->user_id);
+        });
     }
 }
