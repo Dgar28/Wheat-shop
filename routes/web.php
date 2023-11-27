@@ -28,14 +28,15 @@ Route::get('/', function () {
 
 //ruta descarga archivos (se pone antes de las tipo resource)
 Route::get('product-descarga/{product}', [ProductController::class, 'descargar'])->name('product.descarga');
-
+Route::get('productRecord/archive', [ProductRecordController::class, 'archive']);
+Route::post('productRecord/{ProductRecord}/restore', [ProductRecordController::class, 'restore'])->withTrashed();
 
 //rutas tablas (entidades)
 Route::resource('client', ClientController::class)->middleware('auth');
 Route::resource('sale', SaleController::class);
 Route::resource('product', ProductController::class);
 Route::resource('sale_detail', SaleDetailController::class);
-Route::resource('productRecord',ProductRecordController::class);
+Route::resource('productRecord',ProductRecordController::class)->withTrashed(['destroy']);
 
 
 //ruta test

@@ -44,6 +44,12 @@ class ProductRecordController extends Controller
 
     }
 
+    public function archive()
+    {
+        $product_records = ProductRecord::onlyTrashed()->get();
+        return view('prodrecord.archive', compact('product_records'));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -84,6 +90,12 @@ class ProductRecordController extends Controller
      */
     public function destroy(ProductRecord $productRecord)
     {
+        //check model is soft deleted
+        if($productRecord->trashed()){
+            $productRecord->forceDelete();
+            return redirect()->route('productRecord.index');
+        }
+
         try{
             $productRecord->delete();
             return redirect()->route('productRecord.index')
@@ -92,5 +104,12 @@ class ProductRecordController extends Controller
             catch (\Exception $e) {
                 return redirect()->route('productRecord.index'); 
             }
+    }
+
+    public function restore(Request $request, ProductRecord $productRecord)
+    {
+        $productRecord->restore();
+
+        return redirect()->route('productRecord.index');
     }
 }
