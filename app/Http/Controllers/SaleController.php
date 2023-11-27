@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifySaleCreated;
 use App\Models\Sale;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -37,6 +39,8 @@ class SaleController extends Controller
 
             $client = Client::find($request->client_id);
             $client->sales()->save($sal);
+
+            Mail::to($request->user())->send(new NotifySaleCreated($sal));
             return redirect()->route('client.index')->with('success','New sale added!');
         
 
