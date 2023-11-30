@@ -172,7 +172,13 @@
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+
+                            <form method="post" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item">Log Out</button>
+                                <!--<a href="#"></a>
+                                !-->
+                            </form>
                         </div>
                     </div>
                 </div>
