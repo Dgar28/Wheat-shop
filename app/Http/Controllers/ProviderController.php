@@ -12,7 +12,8 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        //
+        $providers = Provider::all();
+        return view('provider.provider-index', compact('providers'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        //
+        return view('provider.provider-create');
     }
 
     /**
@@ -28,7 +29,27 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $provider = $request->validate([
+            'name_p' => 'required',
+           'email' => 'required',
+           'phone' => 'required'
+        ]);
+
+        try{
+            $provider = new Provider();
+        $provider->name_p = $request->name_p;
+        $provider->email = $request->email;
+        $provider->phone = $request->phone;
+        $provider->save();
+
+        //return redirect()->route('product.index');
+        return redirect('provider')
+            ->with('success','Product created successfully. ');
+        }
+        catch (\Exception $e) {
+            return redirect()->route('provider.index'); 
+        }
+
     }
 
     /**
@@ -36,7 +57,7 @@ class ProviderController extends Controller
      */
     public function show(Provider $provider)
     {
-        //
+        return view('provider.provider-show');
     }
 
     /**
@@ -44,7 +65,7 @@ class ProviderController extends Controller
      */
     public function edit(Provider $provider)
     {
-        //
+        
     }
 
     /**
@@ -52,7 +73,19 @@ class ProviderController extends Controller
      */
     public function update(Request $request, Provider $provider)
     {
-        //
+        try{
+            $provider = new Provider();
+        $provider->name_p = $request->name_p;
+        $provider->email = $request->email;
+        $provider->phone = $request->phone;
+        $provider->save();
+
+        return redirect()->route('provider.index')
+            ->with('success','Provider updated successfully');
+          }
+          catch (\Exception $e) {
+            return redirect()->route('provider.index'); 
+        }
     }
 
     /**
@@ -60,6 +93,14 @@ class ProviderController extends Controller
      */
     public function destroy(Provider $provider)
     {
-        //
+        try{
+            $provider->delete();
+        return redirect()->route('provider.index');
+        return redirect()->route('provider.index')
+            ->with('success','Provider deleted successfully');
+        }
+        catch (\Exception $e) {
+            return redirect()->route('provider.index'); 
+        }
     }
 }
