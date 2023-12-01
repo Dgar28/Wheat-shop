@@ -71,6 +71,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
+        $clients = Client::query()->with('user');
         return view('client.show', compact('client'));
     }
 
